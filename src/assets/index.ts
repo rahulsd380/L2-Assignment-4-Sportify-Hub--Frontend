@@ -5,9 +5,12 @@ import logo from "./Images/logo.png";
 import user from "./Icons/user.svg";
 import wishlist from "./Icons/wishlist.svg";
 import cart from "./Icons/cart.svg";
+import arrow from "./Icons/arrow.svg";
+
 import location from "./Icons/location.svg";
 import phone from "./Icons/phone.svg";
 import email from "./Icons/email.svg";
+
 import facebook from "./Icons/Sicial Media/facebook.svg";
 import linkedin from "./Icons/Sicial Media/linkedin.svg";
 import instagram from "./Icons/Sicial Media/instagram.svg";
@@ -55,4 +58,5 @@ export const ICONS = {
     tickMark,
     cart2,
     brand,
+    arrow,
 }

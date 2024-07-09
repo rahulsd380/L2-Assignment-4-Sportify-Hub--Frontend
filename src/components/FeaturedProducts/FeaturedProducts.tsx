@@ -36,12 +36,10 @@ const FeaturedProducts = () => {
     },
   ];
 
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  const prevRef = useRef<HTMLDivElement | null>(null);
+  const nextRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (prevRef.current && nextRef.current) {
-      // Swiper navigation parameters need to be set after the refs are assigned
-      // Use a dynamic import for Swiper to ensure the refs are available before initialization
       import('swiper').then(({ Swiper }) => {
         Swiper.use([Navigation]);
       });
@@ -98,10 +96,13 @@ const FeaturedProducts = () => {
             nextEl: nextRef.current,
           }}
           onBeforeInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
+            const navigation = swiper.params.navigation;
+            if (navigation && typeof navigation !== 'boolean') {
+              navigation.prevEl = prevRef.current;
+              navigation.nextEl = nextRef.current;
+            }
           }}
-          spaceBetween={10}
+          spaceBetween={20}
           modules={[Pagination, Navigation]}
           className="carousel"
         >

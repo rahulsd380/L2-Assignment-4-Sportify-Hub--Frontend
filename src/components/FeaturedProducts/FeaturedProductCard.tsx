@@ -26,7 +26,7 @@ const FeaturedProductCard: React.FC<FeaturedProductCardProps> = ({
 }) => {
   return (
     <div>
-      <div className="bg-white border rounded-xl p-5 max-w-[280px] flex flex-col mb-9">
+      <div className="bg-white border rounded-xl p-5 flex flex-col mb-9">
         <div className="flex justify-center">
           <img src={img} alt={product_name} className="max-w-[180px] h-[150px]" />
         </div>

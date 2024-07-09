@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-2">
               <img src={ICONS.phone} alt="location-icon" className="size-5" />
-              <p className="text-neutral-40">+880 1608249337</p>
+              <a href="tel:+880 1608249337" className="text-neutral-40 hover:underline">+880 1608249337</a>
             </div>
             <div className="flex items-center gap-2">
               <img src={ICONS.email} alt="location-icon" className="size-5" />
