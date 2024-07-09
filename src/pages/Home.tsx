@@ -1,9 +1,11 @@
 // import Hero from "../components/Hero";
 
+import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
+
 const Home = () => {
     return (
         <div>
-            home
+            <FeaturedProducts/>
         </div>
     );
 };

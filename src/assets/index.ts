@@ -21,6 +21,11 @@ import skrill from "./Icons/Payment Methods/skrill.svg";
 import stripe from "./Icons/Payment Methods/stripe.svg";
 import googlePay from "./Icons/Payment Methods/google-pay.svg";
 
+import delivery from "./Icons/delivery.svg";
+import tickMark from "./Icons/tick-mark.svg";
+import cart2 from "./Icons/cart2.svg";
+import brand from "./Icons/brand.svg";
+
 
 // All images will be inside this object
 export const IMAGE = {
@@ -46,4 +51,8 @@ export const ICONS = {
     skrill,
     stripe,
     googlePay,
+    delivery,
+    tickMark,
+    cart2,
+    brand,
 }
