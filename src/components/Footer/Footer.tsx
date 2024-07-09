@@ -1,54 +1,15 @@
 import { Link } from "react-router-dom";
-import { ICONS, IMAGE } from "../assets";
+import { ICONS, IMAGE } from "../../assets";
+import { footerItems, paymentMethods, socialMediaIcons } from "./footerConstants";
 
 const Footer = () => {
-  const footerItems = [
-    {
-      title: "Customer Care",
-      items: [
-        {
-          label: "About Us",
-          path: "about-us",
-        },
-        {
-          label: "Contact Info",
-          path: "contact-info",
-        },
-        {
-          label: "Contact Us",
-          path: "contact-us",
-        },
-        {
-          label: "Store",
-          path: "store",
-        },
-      ],
-    },
-    {
-      title: "Important Links",
-      items: [
-        {
-          label: "My Orders",
-          path: "my-orders",
-        },
-        {
-          label: "Terms & Conditions",
-          path: "terms-conditions",
-        },
-        {
-          label: "Privacy Policy",
-          path: "privacy-policy",
-        },
-        {
-          label: "Returns & Exchanges",
-          path: "returns-exchanges",
-        },
-      ],
-    },
-  ];
+
   return (
     <div className="bg-[#222222] ">
-      <footer className="max-width flex items-center justify-between py-10">
+      <footer className="max-width py-14 flex flex-col gap-10">
+        <div className="flex justify-between">
+
+        
         <div className="flex flex-col gap-5">
           <Link to={"/"} className="flex items-center gap-2">
             <img src={IMAGE.logo} alt="spotify-hub" className="size-8" />
@@ -56,7 +17,7 @@ const Footer = () => {
               Spotify Hub
             </h1>
           </Link>
-          <p className="text-neutral-5 text-sm max-w-[400px]">
+          <p className="text-neutral-40 text-sm max-w-[400px]">
             Sportify Hub: Your ultimate destination for top-quality sporting
             goods. Elevate your game with our curated selection and expert gear.
           </p>
@@ -68,26 +29,30 @@ const Footer = () => {
                 alt="location-icon"
                 className="size-5"
               />
-              <p className="text-neutral-5">Cumilla-3501, Bangladesh</p>
+              <p className="text-neutral-40">Cumilla-3501, Bangladesh</p>
             </div>
             <div className="flex items-center gap-2">
               <img src={ICONS.phone} alt="location-icon" className="size-5" />
-              <p className="text-neutral-5">+880 1608249337</p>
+              <p className="text-neutral-40">+880 1608249337</p>
             </div>
             <div className="flex items-center gap-2">
               <img src={ICONS.email} alt="location-icon" className="size-5" />
-              <p className="text-neutral-5">rahulsd380@gmail.com</p>
+              <p className="text-neutral-40">rahulsd380@gmail.com</p>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex justify-between gap-20">
+
+        
+
+        <div className="flex gap-20">
           {footerItems.map((item, index) => (
-            <ul key={index} className="flex flex-col gap-4">
+            <ul key={index} className="flex flex-col gap-8">
               <h1 className="font-Roboto text-xl font-bold text-neutral-5">
                 {item.title}
               </h1>
-              <li className="flex flex-col gap-3 text-neutral-40 text-sm">
+              <li className="flex flex-col gap-4 text-neutral-40 text-sm">
                 {item.items.map(({ label, path }) => (
                   <Link to={`/${path}`} className="hover:underline">
                     {label}
@@ -98,8 +63,9 @@ const Footer = () => {
           ))}
         </div>
 
+          {/* Newsletter section */}
         <div className="">
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-8">
             <h1 className="font-Roboto text-xl font-bold text-neutral-5">
               Join Our Newsletter Now
             </h1>
@@ -109,6 +75,7 @@ const Footer = () => {
               </p>
             </li>
 
+            {/* Subscribe input field */}  
             <li className="bg-[#2B2B2B] px-4 py-3 rounded-[100px] max-w-[400px] border border-primary-60 transition duration-300 ease-in-out flex items-center justify-between gap-3">
             <input
                 type="text"
@@ -120,18 +87,38 @@ const Footer = () => {
               </label>
             </li>
 
-            {/* <li className="flex items-center relative">
-              <input
-                type="text"
-                placeholder="Enter your e-mail"
-                className="bg-[#2B2B2B] px-4 py-3 rounded-[100px] text-neutral-55 w-[350px] focus:outline-none border border-neutral-55 focus:border-primary-60 transition duration-300 ease-in-out"
-              />
-              <label htmlFor="email" className="ml-4 text-neutral-55 absolute righ">
-                SUBSCRIBE
-              </label>
-            </li> */}
+            {/* Social icons */}
+            <div className="flex items-center gap-3">
+                {
+                  socialMediaIcons.map((icon, index) => (
+                    <a href={icon.href} target="blank" key={index} style={{ backgroundColor: icon.bgColor }} className={`size-10 rounded-full flex justify-center items-center`}>
+                        <img src={icon.icon} alt="" className="size-6" />
+                    </a>
+                  ))
+                }
+            </div>
           </ul>
         </div>
+
+        </div>
+
+        </div>
+
+        <hr className="border border-neutral-55"/>
+        <div className="flex items-center justify-between">
+          <p className="text-neutral-5 text-sm">Copyright © 2018 Plazathemes. All Rights Reserved</p>
+          <div className="flex items-center gap-3">
+                {
+                  paymentMethods.map((payment, index) => (
+                    <a key={index} href={payment.href}>
+                      <img src={payment.icon} alt="" className="size-14" />
+                    </a>
+                  ))
+                }
+          </div>
+        </div>
+
+
       </footer>
     </div>
   );
