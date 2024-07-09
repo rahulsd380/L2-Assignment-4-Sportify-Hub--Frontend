@@ -4,7 +4,7 @@ function App() {
 
   return (
     <div>
-      hello
+      <h1 className='font-Roboto text-3xl font-bold capitalize'>hello this is rahul sutradhar</h1>
     </div>
   )
 }
