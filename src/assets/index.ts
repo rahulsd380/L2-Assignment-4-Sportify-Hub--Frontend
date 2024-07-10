@@ -1,5 +1,6 @@
 // Import images here
 import logo from "./Images/logo.png";
+import aboutUs from "./Images/about-us.jpg";
 
 // Import icons here
 import user from "./Icons/user.svg";
@@ -32,7 +33,8 @@ import brand from "./Icons/brand.svg";
 
 // All images will be inside this object
 export const IMAGE = {
-    logo
+    logo,
+    aboutUs
 };
 
 // All cions will be inside this object

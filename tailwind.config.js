@@ -35,6 +35,7 @@ export default {
         },
         neutral: {
           5: '#f5f5f5',
+          10 : '#F6F6F6',
           15: '#E9ECF2',
           20: '#DCDFE5',
           25: '#202635',

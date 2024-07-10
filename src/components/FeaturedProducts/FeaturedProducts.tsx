@@ -71,6 +71,8 @@ const FeaturedProducts = () => {
         </div>
       </div>
 
+      <hr className="border border-gray-100"/>
+
       <div className="flex">
         <Swiper
           slidesPerView={1}

@@ -1,12 +1,12 @@
 import Lottie from "lottie-react";
 import { ICONS } from "../../assets";
 import contactUsAnimation from "../../assets/contact-us-animation.json";
-import { socialMediaIcons } from "../Footer/footerConstants";
 import ContactUsForm from "./ContactUsForm";
+import SocialMediaILinks from "../Footer/SocialMediaILinks";
 
 const ContactUs = () => {
   return (
-    <div className="max-w-4xl mx-auto font-Roboto flex flex-col md:flex-row gap-10 bg-white border rounded-xl p-10">
+    <div className="max-w-4xl mx-auto font-Roboto flex flex-col md:flex-row gap-10 bg-white border rounded-xl p-5 md:p-10 mt-20">
       <div className="w-full flex flex-col gap-4">
 
         {/* Heading */}
@@ -57,19 +57,7 @@ const ContactUs = () => {
             <p className="text-primary-60 font-semibold">Follow Us On:</p>
           </div>
 
-          <div className="flex items-center gap-4">
-            {socialMediaIcons.map((icon, index) => (
-              <a
-                href={icon.href}
-                target="blank"
-                key={index}
-                style={{ backgroundColor: icon.bgColor }}
-                className={`size-10 rounded-full flex justify-center items-center`}
-              >
-                <img src={icon.icon} alt="" className="size-6" />
-              </a>
-            ))}
-          </div>
+          <SocialMediaILinks/>
         </div>
 
       </div>

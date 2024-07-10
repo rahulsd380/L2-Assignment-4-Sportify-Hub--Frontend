@@ -40,7 +40,7 @@ const Navbar = () => {
 
             <ul className="flex items-center gap-6 text-base text-neutral-60 font-Roboto">
                 {navlinks.map(link => (
-                        <Link key={link.label} to={link.path} className="hover:text-primary-50 transition duration-300">{link.label}</Link>
+                        <Link key={link.label} to={`/${link.path}`} className="hover:text-primary-50 transition duration-300">{link.label}</Link>
                 ))}
             </ul>
 

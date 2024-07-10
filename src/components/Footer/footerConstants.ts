@@ -78,6 +78,24 @@ export const socialMediaIcons = [
   },
 ];
 
+export const teamProfileSocialMediaIcons = [
+  {
+    icon: ICONS.facebook,
+    href: "https://www.facebook.com",
+    bgColor: "#3b5998",
+  },
+  {
+    icon: ICONS.linkedin,
+    href: "https://www.linkedin.com",
+    bgColor: "#0077b5",
+  },
+  {
+    icon: ICONS.instagram,
+    href: "https://www.instagram.com",
+    bgColor: "#e1306c",
+  },
+];
+
 export const paymentMethods = [
   {
     icon: ICONS.visa,

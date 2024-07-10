@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ICONS, IMAGE } from "../../assets";
-import { footerItems, paymentMethods, socialMediaIcons } from "./footerConstants";
+import { footerItems, paymentMethods } from "./footerConstants";
+import SocialMediaILinks from "./SocialMediaILinks";
 
 const Footer = () => {
 
@@ -88,15 +89,7 @@ const Footer = () => {
             </li>
 
             {/* Social icons */}
-            <div className="flex items-center gap-3">
-                {
-                  socialMediaIcons.map((icon, index) => (
-                    <a href={icon.href} target="blank" key={index} style={{ backgroundColor: icon.bgColor }} className={`size-10 rounded-full flex justify-center items-center`}>
-                        <img src={icon.icon} alt="" className="size-6" />
-                    </a>
-                  ))
-                }
-            </div>
+            <SocialMediaILinks/>
           </ul>
         </div>
 
