@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import FeaturedProductCard from "./FeaturedProductCard";
 import { productCards } from "../../mockData/productdetails";
 import CarouselButton from "./CarouselButton";
@@ -38,16 +39,17 @@ const FeaturedProducts = () => {
 
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (prevRef.current && nextRef.current) {
-      import('swiper').then(({ Swiper }) => {
+      import("swiper").then(({ Swiper }) => {
         Swiper.use([Navigation]);
       });
     }
   }, []);
 
   return (
-    <div className="max-width flex flex-col gap-6">
+    <div className="max-width flex flex-col gap-6 mt-20">
       <div className="font-Roboto flex items-center justify-between">
         <h1 className="text-2xl font-bold text-neutral-60">
           <span className="text-primary-50">Featured</span> Products
@@ -71,7 +73,7 @@ const FeaturedProducts = () => {
         </div>
       </div>
 
-      <hr className="border border-gray-100"/>
+      <hr className="border border-gray-100" />
 
       <div className="flex">
         <Swiper
@@ -99,7 +101,7 @@ const FeaturedProducts = () => {
           }}
           onBeforeInit={(swiper) => {
             const navigation = swiper.params.navigation;
-            if (navigation && typeof navigation !== 'boolean') {
+            if (navigation && typeof navigation !== "boolean") {
               navigation.prevEl = prevRef.current;
               navigation.nextEl = nextRef.current;
             }
@@ -110,16 +112,22 @@ const FeaturedProducts = () => {
         >
           {productCards.map((card, index) => (
             <SwiperSlide key={index}>
-              <FeaturedProductCard
-                img={card.img}
-                category={card.category}
-                product_name={card.product_name}
-                rating={card.rating}
-                price={card.price}
-                brand={card.brand}
-                stock={card.stock}
-                delivery_type={card.delivery_type}
-              />
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <FeaturedProductCard
+                  img={card.img}
+                  category={card.category}
+                  product_name={card.product_name}
+                  rating={card.rating}
+                  price={card.price}
+                  brand={card.brand}
+                  stock={card.stock}
+                  delivery_type={card.delivery_type}
+                />
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

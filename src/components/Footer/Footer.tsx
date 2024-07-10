@@ -6,7 +6,7 @@ import SocialMediaILinks from "./SocialMediaILinks";
 const Footer = () => {
 
   return (
-    <div className="bg-[#222222] ">
+    <div className="bg-[#222222] mt-20">
       <footer className="max-width py-14 flex flex-col gap-10">
         <div className="flex justify-between">
 
