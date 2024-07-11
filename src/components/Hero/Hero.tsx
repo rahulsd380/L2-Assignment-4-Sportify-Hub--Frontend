@@ -65,13 +65,13 @@ const Hero = () => {
         <div className="flex justify-between items-center absolute top-0 bottom-0 w-full z-40">
           <button
             ref={prevRef}
-            className="text-white bg-black bg-opacity-50 hover:bg-opacity-75 px-4 py-2 rounded-l transition"
+            className="text-white bg-black bg-opacity-50 hover:bg-opacity-75 px-4 py-2 rounded-r transition"
           >
             Prev
           </button>
           <button
             ref={nextRef}
-            className="text-white bg-black bg-opacity-50 hover:bg-opacity-75 px-4 py-2 rounded-r transition"
+            className="text-white bg-black bg-opacity-50 hover:bg-opacity-75 px-4 py-2 rounded-l transition"
           >
             Next
           </button>

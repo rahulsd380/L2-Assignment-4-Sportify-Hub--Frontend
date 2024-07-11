@@ -3,6 +3,7 @@ import OurStory from "../components/OurStory";
 import OurVision from "../components/OurVision";
 import OurTeam from "../components/OurTeam";
 import ContactUs from "../components/ContactUs/ContactUs";
+import FAQ from "../components/FAQ";
 
 
 const AboutUs = () => {
@@ -12,6 +13,7 @@ const AboutUs = () => {
             <OurStory/>
             <OurVision/>
             <OurTeam/>
+            <FAQ/>
             <ContactUs/>
         </div>
     );
