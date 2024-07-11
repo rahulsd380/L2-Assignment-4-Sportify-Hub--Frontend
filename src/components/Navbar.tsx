@@ -23,11 +23,7 @@ const Navbar = () => {
         {
             label : "Manage Products",
             path : "manage-products"
-        },
-        {
-            label : "Dashboard",
-            path : "dashboard"
-        },
+        }
     ]
     return (
         <div className="flex items-center justify-between max-width mt-5">
@@ -47,7 +43,7 @@ const Navbar = () => {
             <div className="flex items-center gap-5">
                 <img src={ICONS.user} alt="user-profile-icon" className="size-6 cursor-pointer" />
                 <img src={ICONS.wishlist} alt="user-profile-icon" className="size-6 cursor-pointer" />
-                <img src={ICONS.cart} alt="user-profile-icon" className="size-6 cursor-pointer" />
+                <Link to={"/cart"}><img src={ICONS.cart} alt="user-profile-icon" className="size-6 cursor-pointer" /></Link>
             </div>
 
             <div className="flex items-center gap-3">

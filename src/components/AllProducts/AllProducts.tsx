@@ -1,8 +1,14 @@
 import { BsSearch } from "react-icons/bs";
-import { productCards } from "../../mockData/productdetails";
 import AllProductsCard from "./AllProductsCard";
+import { useGetAllProductsQuery } from "../../redux/api/baseApi";
 
 const AllProducts = () => {
+    const {data, isLoading} = useGetAllProductsQuery({})
+
+    if(isLoading){
+        return <p className="font-Roboto">Loading...</p>
+    }
+    // console.log(data);
     return (
         <div className="w-full font-Roboto">
             <div className="flex items-center">
@@ -17,7 +23,7 @@ const AllProducts = () => {
             </div>
 
             <div className="mt-6">
-            {productCards.map((card, index) => (
+            {data?.data.map((card, index) => (
                 <AllProductsCard
                 key={index}
                 details={card}

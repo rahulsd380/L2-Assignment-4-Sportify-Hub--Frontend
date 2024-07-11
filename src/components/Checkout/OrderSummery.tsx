@@ -12,11 +12,11 @@ const OrderSummery = () => {
                 <span>Judd Slim Dress Chino Pant</span>
                 <span>$159.00</span>
               </li>
-              <li className="flex justify-between text-sm text-neutral-60 mb-2">
+              <li className="flex justify-between text-sm text-neutral-60">
                 <span>Augusta Shawl Cardigan</span>
                 <span>$199.99</span>
               </li>
-              <li className="flex justify-between text-neutral-60 font-semibold mb-2">
+              <li className="flex justify-between text-neutral-60 font-semibold mb-2 mt-4">
                 <span>Delivery</span>
                 <span>$16.99</span>
               </li>

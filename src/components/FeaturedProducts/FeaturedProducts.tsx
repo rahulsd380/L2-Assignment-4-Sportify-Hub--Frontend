@@ -8,8 +8,14 @@ import { Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { useEffect, useRef } from "react";
+import { useGetAllProductsQuery } from "../../redux/api/baseApi";
 
 const FeaturedProducts = () => {
+
+  const {data, isLoading} = useGetAllProductsQuery({})
+
+    
+
   const filterButtons = [
     {
       label: "Accessories",
@@ -47,6 +53,10 @@ const FeaturedProducts = () => {
       });
     }
   }, []);
+
+  if(isLoading){
+    return <p className="font-Roboto">Loading...</p>
+}
 
   return (
     <div className="max-width flex flex-col gap-6 mt-20">
@@ -110,7 +120,7 @@ const FeaturedProducts = () => {
           modules={[Pagination, Navigation]}
           className="carousel"
         >
-          {productCards.map((card, index) => (
+          {data?.data.slice(0,6).map((card, index) => (
             <SwiperSlide key={index}>
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
