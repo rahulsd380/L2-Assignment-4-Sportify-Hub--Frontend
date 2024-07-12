@@ -6,8 +6,14 @@ import {
     FiPlusSquare,
   } from "react-icons/fi";
   import { motion } from "framer-motion";
-  import { Dispatch, SetStateAction, useState } from "react";
+  import {useState } from "react";
   import { IconType } from "react-icons";
+
+  interface OptionProps {
+    text: string;
+    Icon: IconType;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }
   
   const StaggeredDropDown = () => {
     const [open, setOpen] = useState(true);
@@ -48,7 +54,7 @@ import {
     );
   };
   
-  const Option = ({ text, Icon, setOpen }) => {
+  const Option: React.FC<OptionProps> = ({ text, Icon, setOpen } ) => {
     return (
       <motion.li
         variants={itemVariants}

@@ -22,7 +22,7 @@ const Navbar = () => {
         },
         {
             label : "Manage Products",
-            path : "manage-products"
+            path : "dashboard"
         }
     ]
     return (

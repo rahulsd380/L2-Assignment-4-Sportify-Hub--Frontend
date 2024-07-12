@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ICONS } from "../../assets";
 import { FaStar } from "react-icons/fa";
 
-type FeaturedProductCardProps = {
+export type FeaturedProductCardProps = {
   img: string;
   category: string;
   product_name: string;

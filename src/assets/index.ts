@@ -30,6 +30,18 @@ import tickMark from "./Icons/tick-mark.svg";
 import cart2 from "./Icons/cart2.svg";
 import brand from "./Icons/brand.svg";
 
+// Dashboard icons
+import dashboard from "./Icons/Dashboard Icons/dashboard.svg";
+import analysis from "./Icons/Dashboard Icons/analysis.svg";
+import sales from "./Icons/Dashboard Icons/sales.svg";
+import products from "./Icons/Dashboard Icons/products.svg";
+import customers from "./Icons/Dashboard Icons/user-group.svg";
+import report from "./Icons/Dashboard Icons/report.svg";
+import transaction from "./Icons/Dashboard Icons/transaction.svg";
+import message from "./Icons/Dashboard Icons/message.svg";
+import addProduct from "./Icons/Dashboard Icons/add-product.svg";
+import orders from "./Icons/Dashboard Icons/orders.svg";
+
 
 // All images will be inside this object
 export const IMAGE = {
@@ -61,4 +73,14 @@ export const ICONS = {
     cart2,
     brand,
     arrow,
+    dashboard,
+    analysis,
+    sales,
+    products,
+    customers,
+    report,
+    transaction,
+    message,
+    addProduct,
+    orders,
 }

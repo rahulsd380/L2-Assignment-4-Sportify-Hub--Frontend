@@ -1,6 +1,7 @@
 import { BsSearch } from "react-icons/bs";
 import AllProductsCard from "./AllProductsCard";
 import { useGetAllProductsQuery } from "../../redux/api/baseApi";
+import { FeaturedProductCardProps } from "../FeaturedProducts/FeaturedProductCard";
 
 const AllProducts = () => {
     const {data, isLoading} = useGetAllProductsQuery({})
@@ -23,18 +24,10 @@ const AllProducts = () => {
             </div>
 
             <div className="mt-6">
-            {data?.data.map((card, index) => (
+            {data?.data.map((card : FeaturedProductCardProps, index : number) => (
                 <AllProductsCard
                 key={index}
                 details={card}
-                  img={card.img}
-                  category={card.category}
-                  product_name={card.product_name}
-                  rating={card.rating}
-                  price={card.price}
-                  brand={card.brand}
-                  stock={card.stock}
-                  delivery_type={card.delivery_type}
                 />
           ))}
             </div>

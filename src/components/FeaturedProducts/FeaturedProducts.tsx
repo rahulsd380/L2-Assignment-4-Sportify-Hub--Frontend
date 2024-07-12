@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import FeaturedProductCard from "./FeaturedProductCard";
-import { productCards } from "../../mockData/productdetails";
+import FeaturedProductCard, { FeaturedProductCardProps } from "./FeaturedProductCard";
 import CarouselButton from "./CarouselButton";
 
 import "swiper/css/pagination";
@@ -43,8 +42,8 @@ const FeaturedProducts = () => {
     },
   ];
 
-  const prevRef = useRef<HTMLDivElement | null>(null);
-  const nextRef = useRef<HTMLDivElement | null>(null);
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (prevRef.current && nextRef.current) {
@@ -120,7 +119,7 @@ const FeaturedProducts = () => {
           modules={[Pagination, Navigation]}
           className="carousel"
         >
-          {data?.data.slice(0,6).map((card, index) => (
+          {data?.data.slice(0,6).map((card : FeaturedProductCardProps, index : number) => (
             <SwiperSlide key={index}>
               <motion.div
                 initial={{ opacity: 0, x: 50 }}

@@ -53,8 +53,8 @@ const OurTeam = () => {
           },
       ];
 
-      const prevRef = useRef<HTMLDivElement | null>(null);
-  const nextRef = useRef<HTMLDivElement | null>(null);
+      const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (prevRef.current && nextRef.current) {
       import('swiper').then(({ Swiper }) => {

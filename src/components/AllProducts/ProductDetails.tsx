@@ -1,13 +1,27 @@
 import { FaCartPlus, FaFacebookF, FaInstagram, FaLinkedinIn, FaStar } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { ICONS } from "../../assets";
-import { socialMediaIcons } from "../Footer/footerConstants";
 import { IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import { useState } from "react";
 
 
-const ProductDetails = ({details, openModal, setOpenModal}) => {
+interface ProductDetailsProps {
+  details: {
+      img: string;
+      category: string;
+      product_name: string;
+      rating: number;
+      price: string;
+      brand: string;
+      stock: number;
+      delivery_type: string;
+  };
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
+}
+
+const ProductDetails: React.FC<ProductDetailsProps> = ({details, openModal, setOpenModal}) => {
     const {img, category, product_name, rating, price, brand, stock, delivery_type} = details;
     const [tab, setTab] = useState<"description" | "reviews">("description")
     const socialMediaIcon = [
