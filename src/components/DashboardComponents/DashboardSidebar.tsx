@@ -1,7 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import { ICONS, IMAGE } from "../../assets";
+import { useGetAllProductsQuery } from "../../redux/api/baseApi";
 
 const DashboardSidebar = () => {
+  const {data} = useGetAllProductsQuery({})
   const menu = [
     {
         icon : ICONS.dashboard,
@@ -33,7 +35,7 @@ const DashboardSidebar = () => {
     },
     {
         icon : ICONS.products,
-      label: "Products",
+      label: `Products (${data?.data.length})`,
       path: "dashboard/products",
     },
     {
@@ -60,9 +62,11 @@ const DashboardSidebar = () => {
       path: "dashboard/chat",
     },
   ];
+
+  
   return (
     <div>
-      <div className="w-[250px] bg-gray-800 p-5 h-screen">
+      <div className="w-[250px] bg-gray-800 p-5 h-full">
         <div className="flex flex-col">
           <Link to={"/"} className="flex items-center gap-2 mb-8">
             <img src={IMAGE.logo} alt="spotify-hub" className="size-8" />

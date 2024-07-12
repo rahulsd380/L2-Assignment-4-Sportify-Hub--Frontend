@@ -10,6 +10,7 @@ import Checkout from "../pages/Checkout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ErrorPage from "../pages/ErrorPage";
+import AddProduct from "../components/DashboardComponents/AddProduct";
 
   export const router = createBrowserRouter([
     {
@@ -40,7 +41,7 @@ import ErrorPage from "../pages/ErrorPage";
       ]
     },
     {
-      path: "dashboard",
+      path: "/dashboard",
       element: <DashboardLayout/>,
       errorElement : <ErrorPage/>,
       children : [
@@ -49,8 +50,8 @@ import ErrorPage from "../pages/ErrorPage";
             element: <Dashboard/>
         },
         {
-            path: "dashboard/add-product",
-            element: <Dashboard/>
+            path: "add-product",
+            element: <AddProduct/>
         },
       ]
     },
