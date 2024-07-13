@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1' }),
-  tagTypes: ["products", "cart"],
+  tagTypes: ["products", "cart", "order"],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
         query: () => ({
@@ -80,7 +80,24 @@ export const baseApi = createApi({
         invalidatesTags: ["cart"],
       }),
 
+      createOrder: builder.mutation({
+        query: (data) => ({
+            method : "POST",
+            url : "/orders/create-order",
+            body : data,
+        }),
+        invalidatesTags: ["cart", "order"],
+      }),
+
+      getAllOrders: builder.query({
+        query: () => ({
+            method : "GET",
+            url : "/orders",
+        }),
+        providesTags : ["order"]
+      }),
+
   }),
 });
 
-export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllCartProductsQuery, useDeleteCartProductMutation, useCreateCartProductMutation, useUpdateCartProductMutation } = baseApi;
+export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllCartProductsQuery, useDeleteCartProductMutation, useCreateCartProductMutation, useUpdateCartProductMutation, useCreateOrderMutation, useGetAllOrdersQuery } = baseApi;

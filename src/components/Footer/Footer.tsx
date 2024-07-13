@@ -7,8 +7,8 @@ const Footer = () => {
 
   return (
     <div className="bg-[#222222] mt-20">
-      <footer className="max-width py-14 flex flex-col gap-10">
-        <div className="flex justify-between">
+      <footer className="max-width px-8 md:px-0 py-8 md:py-14 flex flex-col gap-10">
+        <div className="flex flex-col md:flex-row justify-between gap-7 md:gap-0">
 
         
         <div className="flex flex-col gap-5">
@@ -43,13 +43,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-between gap-20">
+        <div className="flex flex-col md:flex-row justify-between gap-7 md:gap-20">
 
         
 
-        <div className="flex gap-20">
+        <div className="flex flex-col md:flex-row gap-7 md:gap-20">
           {footerItems.map((item, index) => (
-            <ul key={index} className="flex flex-col gap-8">
+            <ul key={index} className="flex flex-col gap-4 md:gap-8">
               <h1 className="font-Roboto text-xl font-bold text-neutral-5">
                 {item.title}
               </h1>
@@ -66,7 +66,7 @@ const Footer = () => {
 
           {/* Newsletter section */}
         <div className="">
-          <ul className="flex flex-col gap-8">
+          <ul className="flex flex-col gap-4 md;gap-8">
             <h1 className="font-Roboto text-xl font-bold text-neutral-5">
               Join Our Newsletter Now
             </h1>
@@ -89,7 +89,9 @@ const Footer = () => {
             </li>
 
             {/* Social icons */}
+            <div className="flex justify-center md:justify-start">
             <SocialMediaILinks/>
+            </div>
           </ul>
         </div>
 
@@ -98,7 +100,9 @@ const Footer = () => {
         </div>
 
         <hr className="border border-neutral-55"/>
-        <div className="flex items-center justify-between">
+
+        {/* Copyright and payment options */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
           <p className="text-neutral-5 text-sm">Copyright © 2018 Plazathemes. All Rights Reserved</p>
           <div className="flex items-center gap-3">
                 {

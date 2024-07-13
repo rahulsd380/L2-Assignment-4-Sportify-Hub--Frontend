@@ -10,7 +10,6 @@ const Cart = () => {
 
 
     useEffect(() => {
-        console.log("API Data:", data); // Log the full data object
         if (data?.data) {
             setCartData(data.data);
         }
@@ -45,7 +44,7 @@ const Cart = () => {
                     onUpdateQuantity={handleUpdateQuantity} 
                     onRemoveItem={handleRemoveItem} 
                 />
-                <CartTotal data={cartData} /> {/* Ensure this uses cartData */}
+                <CartTotal data={cartData} />
             </div>
         </div>
     );
