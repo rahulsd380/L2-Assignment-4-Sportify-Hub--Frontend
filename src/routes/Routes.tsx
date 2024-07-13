@@ -11,6 +11,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ErrorPage from "../pages/ErrorPage";
 import AddProduct from "../components/DashboardComponents/AddProduct";
+import DashboardProducts from './../components/DashboardComponents/Products/Products';
 
   export const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ import AddProduct from "../components/DashboardComponents/AddProduct";
         {
             path: "add-product",
             element: <AddProduct/>
+        },
+        {
+            path: "products",
+            element: <DashboardProducts/>
         },
       ]
     },

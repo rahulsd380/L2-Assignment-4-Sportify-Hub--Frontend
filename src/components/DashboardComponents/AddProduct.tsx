@@ -1,13 +1,13 @@
 import Lottie from "lottie-react";
 import { ICONS } from "../../assets";
-import contactUsAnimation from "../../assets/contact-us-animation.json";
+import addProductAnimation from "../../assets/add product animation.json";
 import SocialMediaILinks from "../Footer/SocialMediaILinks";
 import AddProductForm from "./AddProduct/AddProductForm";
 
 const AddProduct = () => {
   return (
     <div className="  font-Roboto flex flex-col md:flex-row gap-10 bg-white border rounded-xl p-5 md:p-10">
-      <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-6">
 
         {/* Heading */}
         <div className="flex flex-col gap-1">
@@ -26,7 +26,7 @@ const AddProduct = () => {
       <div className="w-full flex flex-col gap-8">
         {/* Animation */}
         <div className="max-w-[400px] mx-auto">
-          <Lottie animationData={contactUsAnimation} loop={true} />
+          <Lottie animationData={addProductAnimation} loop={true} />
         </div>
 
         {/* Contact Info */}

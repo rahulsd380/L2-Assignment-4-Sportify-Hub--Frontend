@@ -61,18 +61,6 @@ const AddProductForm = () => {
     }catch(error){
       console.log(error);
     }
-
-    // console.log({
-    //   product_name,
-    //   img,
-    //   category,
-    //   price,
-    //   brand,
-    //   stock,
-    //   delivery_type,
-    //   description,
-    //   details,
-    // });
 }
 
   return (

@@ -4,6 +4,7 @@ import { ICONS } from "../../assets";
 import { FaStar } from "react-icons/fa";
 
 export type FeaturedProductCardProps = {
+  details : {
   img: string;
   category: string;
   product_name: string;
@@ -12,18 +13,23 @@ export type FeaturedProductCardProps = {
   brand: string;
   stock: number;
   delivery_type: string;
+  }
 };
 
 const FeaturedProductCard: React.FC<FeaturedProductCardProps> = ({
-  img,
-  category,
-  product_name,
-  rating,
-  price,
-  brand,
-  stock,
-  delivery_type,
+  details
 }) => {
+  if (!details) return null;
+
+  const {
+    img,
+    category,
+    product_name,
+    rating,
+    price,
+    brand,
+    stock,
+    delivery_type} = details
   return (
     <div>
       <div className="bg-white border rounded-xl p-5 flex flex-col mb-9">

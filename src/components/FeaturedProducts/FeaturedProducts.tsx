@@ -127,14 +127,7 @@ const FeaturedProducts = () => {
                 transition={{ duration: 0.5 }}
               >
                 <FeaturedProductCard
-                  img={card.img}
-                  category={card.category}
-                  product_name={card.product_name}
-                  rating={card.rating}
-                  price={card.price}
-                  brand={card.brand}
-                  stock={card.stock}
-                  delivery_type={card.delivery_type}
+                  details={card}
                 />
               </motion.div>
             </SwiperSlide>

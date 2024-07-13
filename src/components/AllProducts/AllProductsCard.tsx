@@ -116,3 +116,6 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({
 };
 
 export default AllProductsCard;
+
+
+
