@@ -2,23 +2,23 @@ import { ICONS } from "../../assets";
 
 export const footerItems = [
   {
-    title: "Customer Care",
+    title: "Important Links",
     items: [
       {
         label: "About Us",
         path: "about-us",
       },
       {
-        label: "Contact Info",
-        path: "contact-info",
+        label: "All Products",
+        path: "all-products",
       },
       {
-        label: "Contact Us",
-        path: "contact-us",
+        label: "Cart",
+        path: "cart",
       },
       {
-        label: "Store",
-        path: "store",
+        label: "Manage products",
+        path: "dashboard",
       },
     ],
   },
