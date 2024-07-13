@@ -52,3 +52,35 @@ Sportify Hub is designed to offer a seamless shopping experience for sports enth
    ```bash
    git clone https://github.com/your-username/sportify-hub.git
    cd sportify-hub
+   npm install
+   or
+   yarn
+
+## Usage
+
+To use Sportify Hub, follow these steps:
+
+1. **Browse Products:**
+   - Navigate through various categories to find the sports accessories and equipment you need.
+   - Use the search bar to quickly find specific products.
+   - Apply filters to narrow down your search based on categories, brands, ratings, and price range.
+
+2. **View Product Details:**
+   - Click on a product to view its detailed description, specifications, and customer reviews.
+   - Check available sizes, colors, and other options.
+
+3. **Add to Cart:**
+   - Select the desired quantity and add the product to your cart.
+   - Continue shopping or proceed to checkout.
+
+4. **Checkout:**
+   - Review the items in your cart and make any necessary adjustments.
+   - Provide your shipping details and select a payment method.
+   - Confirm your order to complete the purchase.
+
+5. **Track Your Order:**
+   - After placing an order, track its status from your account dashboard.
+   - View your order history and reorder your favorite products.
+
+6. **Leave a Review:**
+   - Share your experience with other customers by leaving a review for purchased products.
