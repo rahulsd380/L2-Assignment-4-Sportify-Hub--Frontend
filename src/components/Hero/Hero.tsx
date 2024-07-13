@@ -26,9 +26,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="max-width flex flex-col md:flex-row gap-10 mt-10">
+    <div className="max-width flex flex-col lg:flex-row gap-10 mt-10">
+      <div className="flex justify-center lg:justify-start">
       <StaggeredDropDown />
-      <div className="max-w-[940px] h-[480px] bg-neutral-60 rounded-md relative items-center">
+      </div>
+      <div className="w-full max-w-[940px] h-[480px] bg-neutral-60 rounded-md relative items-center">
         <Swiper
           spaceBetween={0}
           slidesPerView={1}

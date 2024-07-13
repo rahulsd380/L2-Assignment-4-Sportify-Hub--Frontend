@@ -66,7 +66,7 @@ const FeaturedProducts = () => {
 
         <div className="flex items-center gap-10">
           {/* Filter buttons */}
-          <div className="px-4 py-3 bg-white border rounded-md flex justify-between items-center gap-10">
+          <div className="px-4 py-3 bg-white border rounded-md hidden lg:flex justify-between items-center gap-10">
             {filterButtons.map((btn, index) => (
               <button
                 key={index}

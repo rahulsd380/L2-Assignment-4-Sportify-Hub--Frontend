@@ -44,7 +44,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({
   const [openModal, setOpenModal] = useState(false);
   return (
     <div>
-      <div className="bg-white border border-primary-60 rounded-xl p-5 flex gap-5 mb-9 font-Roboto">
+      <div className="bg-white border border-primary-60 rounded-xl p-5 flex flex-col lg:flex-row gap-5 mb-9 font-Roboto">
         <div className="flex justify-center items-center bg-gradient-to-r from-slate-50 to-gray-100 p-5 rounded max-w-[400px] max-h-[400px]">
           <img
             src={img}

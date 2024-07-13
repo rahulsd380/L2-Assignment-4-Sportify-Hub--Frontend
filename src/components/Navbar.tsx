@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ICONS, IMAGE } from "../assets";
+import HamburgerMenu from "./HamburgerMenu";
 
 
 const Navbar = () => {
@@ -32,7 +33,7 @@ const Navbar = () => {
                 <h1 className="font-Roboto text-2xl font-bold text-primary-50">Spotify Hub</h1>
             </Link>
 
-            <div className="flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-8">
 
             <ul className="flex items-center gap-6 text-base text-neutral-60 font-Roboto">
                 {navlinks.map(link => (
@@ -55,6 +56,12 @@ const Navbar = () => {
                 </button>
                 
             </div>
+
+            
+
+            </div>
+            <div className="block lg:hidden">
+                <HamburgerMenu/>
             </div>
         </div>
     );
