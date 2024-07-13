@@ -17,6 +17,11 @@ const FilterForm = () => {
         "Team Sports"
     ];
 
+    const sort = [
+        "Ascending",
+        "Descending "
+    ];
+
     const brands = [
         "Nike",
         "Adidas",
@@ -59,6 +64,27 @@ const FilterForm = () => {
                 <div className="flex items-center justify-between border-b pb-3">
                 <h1 className="text-primary-60 font-semibold text-xl">Apply Filter</h1>
                 <button onClick={handleClearForm} className="text-rose-600 font-semibold text-xl">Clear</button>
+                </div>
+
+                <div>
+                <h1 className="text-neutral-60 font-semibold mt-3">Sort</h1>
+                <ul className="grid grid-cols-2 gap-3 mt-3">
+                    {sort.map((category, index) => (
+                        <li key={index} className="text-sm">
+                            <label className="flex items-center">
+                                <input 
+                                    type="radio" 
+                                    name="category" 
+                                    value={category} 
+                                    checked={selectedCategory === category}
+                                    onChange={handleCategoryChange} 
+                                    className="mr-2"
+                                />
+                                {category}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
                 </div>
 
                 <div>

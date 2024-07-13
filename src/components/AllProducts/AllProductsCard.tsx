@@ -3,6 +3,8 @@ import { FaCartPlus, FaStar } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useState } from "react";
 import ProductDetails from "./ProductDetails";
+import { useCreateCartProductMutation } from "../../redux/api/baseApi";
+import { toast } from "sonner";
 
 type AllProductCardProps = {
   details : {
@@ -20,7 +22,24 @@ type AllProductCardProps = {
 const AllProductsCard: React.FC<AllProductCardProps> = ({
     details
 }) => {
-    const {img, category, product_name, rating, price, brand, stock, delivery_type} = details;
+    const {_id, img, category, product_name, rating, price, brand, stock, delivery_type} = details;
+    const [quantity, setQuantity] = useState(1);
+
+    const [createCartProduct, {isLoading}] = useCreateCartProductMutation();
+
+    const handlePostOnCart = async () => {
+      const response = await createCartProduct({
+        img,
+        productId : _id,
+        quantity,
+        price,
+        product_name
+      })
+      if(response?.data?.success){
+        // setOpenModal(true);
+        toast.success("Added To Cart Successfully.")
+      }
+    }
 
   const [openModal, setOpenModal] = useState(false);
   return (
@@ -54,7 +73,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({
               <span className="text-neutral-55 font-normal line-through text-lg">
                 $220
               </span>{" "}
-              {price}
+              ${price}
             </h2>
 
             {/* ratings */}
@@ -96,7 +115,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({
                 <IoMdHeartEmpty className="group-hover:text-white" />
               </button>
 
-              <button className="rounded text-primary-60 px-3 py-3 border border-primary-60 hover:bg-primary-70 transition duration-300 flex justify-center items-center group">
+              <button onClick={handlePostOnCart} className="rounded text-primary-60 px-3 py-3 border border-primary-60 hover:bg-primary-70 transition duration-300 flex justify-center items-center group">
                 <FaCartPlus className="group-hover:text-white" />
               </button>
             </div>
@@ -110,7 +129,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({
         </div>
       </div>
 
-      <ProductDetails details={details} openModal={openModal} setOpenModal={setOpenModal} />
+      <ProductDetails handlePostOnCart={handlePostOnCart} details={details} openModal={openModal} setOpenModal={setOpenModal} />
     </div>
   );
 };

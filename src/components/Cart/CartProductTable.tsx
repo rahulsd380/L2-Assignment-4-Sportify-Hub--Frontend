@@ -1,160 +1,115 @@
 import { RxCross2 } from "react-icons/rx";
+import { useDeleteCartProductMutation, useUpdateCartProductMutation } from "../../redux/api/baseApi";
+import { toast } from "sonner";
 
-interface Product {
-    id: number;
-    image: string;
-    name: string;
-    price: number;
-    quantity: number;
-  }
+const CartProductTable = ({ data, onRemoveItem }) => {
+  const [deleteCartProduct, { isLoading: isDeleting }] = useDeleteCartProductMutation();
+  const [updateCartProduct, { isLoading: isUpdating }] = useUpdateCartProductMutation();
 
-const CartProductTable = () => {
-    const product: Product = {
-        id: 1,
-        image: 'https://example.com/iphone11.jpg', // Replace with actual image URL
-        name: 'Unlocked Apple iPhone11 Pro, 64GB/256GB, 12MP Camera',
-        price: 480.99,
-        quantity: 1,
-      };
-    return (
-        <div>
-             <div className="overflow-x-auto font-Roboto">
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead>
-          <tr>
-            <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Product
-            </th>
-            <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Price
-            </th>
-            <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Quantity
-            </th>
-            <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Subtotal
-            </th>
-            <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
-              <img src="https://i.ibb.co/dkWKKZx/cricket-ball-3.png" alt={product.name} className="w-12 h-12 object-cover mr-4" />
-              <span>{product.name}</span>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${product.price.toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div className="flex items-center">
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">-</button>
-                <input
-                  type="text"
-                  value={product.quantity}
-                  readOnly
-                  className="w-12 text-center border border-gray-300 mx-2"
-                />
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">+</button>
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${(product.price * product.quantity).toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-            <RxCross2 className="text-red-600 hover:text-red-800 cursor-pointer"/>
-            </td>
-          </tr>
+  const handleDeleteCartItem = async (id) => {
+    try {
+      toast.loading("Deleting...");
+      await deleteCartProduct(id).unwrap();
+      toast.success("Product deleted successfully");
+      onRemoveItem(id);
+    } catch (error) {
+      toast.error(`Error deleting product: ${error.message}`);
+    } finally {
+      toast.dismiss();
+    }
+  };
 
-          <tr>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
-              <img src="https://i.ibb.co/dkWKKZx/cricket-ball-3.png" alt={product.name} className="w-12 h-12 object-cover mr-4" />
-              <span>{product.name}</span>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${product.price.toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div className="flex items-center">
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">-</button>
-                <input
-                  type="text"
-                  value={product.quantity}
-                  readOnly
-                  className="w-12 text-center border border-gray-300 mx-2"
-                />
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">+</button>
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${(product.price * product.quantity).toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-            <RxCross2 className="text-red-600 hover:text-red-800 cursor-pointer"/>
-            </td>
-          </tr>
+  const handleUpdateCartProduct = async (id, quantity) => {
+    console.log("from carttable",id, quantity);
+    try {
+      toast.loading("Updating quantity...");
+      const response = await updateCartProduct({ id, quantity }).unwrap();
+      if (response.success) {
+        toast.success(response.message);
+      }
+      console.log(response);
+    } catch (error) {
+      toast.error(`Error updating product: ${error.message}`);
+    } finally {
+      toast.dismiss();
+    }
+  };
 
-          <tr>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
-              <img src="https://i.ibb.co/dkWKKZx/cricket-ball-3.png" alt={product.name} className="w-12 h-12 object-cover mr-4" />
-              <span>{product.name}</span>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${product.price.toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div className="flex items-center">
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">-</button>
-                <input
-                  type="text"
-                  value={product.quantity}
-                  readOnly
-                  className="w-12 text-center border border-gray-300 mx-2"
-                />
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">+</button>
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${(product.price * product.quantity).toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-            <RxCross2 className="text-red-600 hover:text-red-800 cursor-pointer"/>
-            </td>
-          </tr>
+  const onUpdateQuantity = (id, quantity) => {
+    if (quantity < 1) return;
+    handleUpdateCartProduct(id, quantity);
+  };
 
-          <tr>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
-              <img src="https://i.ibb.co/dkWKKZx/cricket-ball-3.png" alt={product.name} className="w-12 h-12 object-cover mr-4" />
-              <span>{product.name}</span>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${product.price.toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <div className="flex items-center">
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">-</button>
-                <input
-                  type="text"
-                  value={product.quantity}
-                  readOnly
-                  className="w-12 text-center border border-gray-300 mx-2"
-                />
-                <button className="px-2 py-1 border border-gray-300 text-gray-600">+</button>
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              ${(product.price * product.quantity).toFixed(2)}
-            </td>
-            <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-            <RxCross2 className="text-red-600 hover:text-red-800 cursor-pointer"/>
-            </td>
-          </tr>
-          
-        </tbody>
-      </table>
+  return (
+    <div className="w-full">
+      <div className="overflow-x-auto font-Roboto w-full">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Product
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Price
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Quantity
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Subtotal
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((cartItem) => (
+              <tr key={cartItem._id}>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
+                  <img src={cartItem.img} alt={cartItem.product_name} className="w-12 h-12 object-cover mr-4" />
+                  <span>{cartItem.product_name}</span>
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                  ${parseFloat(cartItem.price).toFixed(2)}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                  <div className="flex items-center">
+                    <button
+                      className="px-2 py-1 border border-gray-300 text-gray-600"
+                      onClick={() => onUpdateQuantity(cartItem._id, cartItem.quantity - 1)}
+                      disabled={cartItem.quantity <= 1}
+                    >
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      value={cartItem.quantity}
+                      readOnly
+                      className="w-12 text-center border border-gray-300 mx-2"
+                    />
+                    <button
+                      className="px-2 py-1 border border-gray-300 text-gray-600"
+                      onClick={() => onUpdateQuantity(cartItem._id, cartItem.quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                  ${(parseFloat(cartItem.price) * cartItem.quantity).toFixed(2)}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
+                  <RxCross2
+                    onClick={() => handleDeleteCartItem(cartItem._id)}
+                    className="text-red-600 hover:text-red-800 cursor-pointer"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-        </div>
-    );
+  );
 };
 
 export default CartProductTable;

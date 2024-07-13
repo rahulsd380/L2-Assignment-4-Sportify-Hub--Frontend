@@ -10,9 +10,12 @@ import { ICONS } from "../../assets";
 import { IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import { useState } from "react";
+import { useCreateCartProductMutation } from "../../redux/api/baseApi";
+import { toast } from "sonner";
 
 interface ProductDetailsProps {
   details: {
+    _id: string;
     img: string;
     category: string;
     product_name: string;
@@ -32,6 +35,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   setOpenModal,
 }) => {
   const {
+    _id,
     img,
     category,
     product_name,
@@ -41,7 +45,33 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     stock,
     delivery_type,
   } = details;
+  const [quantity, setQuantity] = useState(1);
+
+  const [createCartProduct, { isLoading }] = useCreateCartProductMutation();
+
+  const handlePostOnCart = async () => {
+    const response = await createCartProduct({
+      img,
+      productId: _id,
+      quantity,
+      price,
+      product_name,
+    });
+    if (response?.data?.success) {
+      toast.success("Added To Cart Successfully.");
+      setOpenModal(false);
+    }
+  };
+
+  const handleQuantityChange = (change: number) => {
+    setQuantity((prevQuantity) => {
+      const newQuantity = prevQuantity + change;
+      return newQuantity < 1 ? 1 : newQuantity;
+    });
+  };
+
   const [tab, setTab] = useState<"description" | "reviews">("description");
+
   const socialMediaIcon = [
     {
       icon: <FaFacebookF />,
@@ -56,6 +86,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
       href: "https://www.facebook.com/sportifyhub/",
     },
   ];
+
   return (
     <div className="">
       <div
@@ -167,23 +198,29 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                   <div className="flex items-center gap-1">
                     <p className="text-xs">QTY : </p>
                     <div className="rounded flex justify-between items-center gap-8 border max-w-[150px] pl-2 ">
-                      <p>4</p>
+                      <p>{quantity}</p>
 
                       <div className="flex">
-                        <button className="border-l py-3 px-1 border-y-0 hover:bg-gray-100 flex justify-center items-center">
+                        <button
+                          onClick={() => handleQuantityChange(-1)}
+                          className="border-l py-3 px-1 border-y-0 hover:bg-gray-100 flex justify-center items-center"
+                        >
                           <FiMinus />
                         </button>
 
-                        <button className="border-l py-3 px-1 border-y-0 hover:bg-gray-100 flex justify-center items-center">
+                        <button
+                          onClick={() => handleQuantityChange(1)}
+                          className="border-l py-3 px-1 border-y-0 hover:bg-gray-100 flex justify-center items-center"
+                        >
                           <IoAddOutline />
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  {/* View details button */}
+                  {/* Add to Cart button */}
                   <button
-                    onClick={() => setOpenModal(!openModal)}
+                    onClick={handlePostOnCart}
                     className="rounded text-xs text-white px-4 py-3 bg-primary-60 hover:bg-primary-70 transition duration-300 flex justify-center items-center"
                   >
                     Add To Cart
@@ -216,140 +253,31 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
               <button
                 onClick={() => setTab("reviews")}
-                className={`rounded text-xs  px-4 py-3 ${
+                className={`rounded text-xs px-4 py-3 ${
                   tab === "reviews"
                     ? "bg-primary-60 text-white"
                     : "bg-neutral-5 text-neutral-60 hover:text-white"
                 } hover:bg-primary-70 transition duration-300 flex justify-center items-center`}
               >
-                Reviews
+                Reviews (10)
               </button>
             </div>
-            <div className="border rounded-md p-4 mt-5">
-              {tab === "description" ? (
-                <div>
-                  <p className="text-sm text-neutral-55 text-justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    beatae praesentium repellendus inventore. Explicabo dolore
-                    est modi minus suscipit, tempora eligendi ipsum sunt quae
-                    quo deserunt fugiat molestiae dolorem aliquam dolorum rem,
-                    vero quaerat eaque autem dignissimos consectetur hic enim
-                    optio sit. Culpa officiis iure hic officia mollitia,
-                    exercitationem nisi.
-                  </p>
-                  <p className="text-sm text-neutral-55 text-justify mt-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    beatae praesentium repellendus inventore. Explicabo dolore
-                    est modi minus suscipit, tempora eligendi ipsum sunt quae
-                    quo deserunt fugiat molestiae dolorem aliquam dolorum rem,
-                    vero quaerat eaque autem dignissimos consectetur hic enim
-                    optio sit. Culpa officiis iure hic officia mollitia,
-                    exercitationem nisi.
-                  </p>
-                  <p className="text-sm text-neutral-55 text-justify mt-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    beatae praesentium repellendus inventore. Explicabo dolore
-                    est modi minus suscipit, tempora eligendi ipsum sunt quae
-                    quo deserunt fugiat molestiae dolorem aliquam dolorum rem,
-                    vero quaerat eaque autem dignissimos consectetur hic enim
-                    optio sit. Culpa officiis iure hic officia mollitia,
-                    exercitationem nisi.
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <div className="px-6 py-2 border-b border-gray-300 mb-6">
-                    <div className="flex items-center mb-4">
-                      {/* <img src={customerPhoto} alt={customerName} className="w-12 h-12 rounded-full mr-4" /> */}
-                      <div>
-                        <h2 className="font-semibold">Rahul Sutradhar</h2>
-                        <p className="text-sm text-gray-500">10 July, 2024</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center mb-4">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={
-                            index < rating ? "text-yellow-500" : "text-gray-300"
-                          }
-                        />
-                      ))}
-                    </div>
-                    <h3 className="font-semibold mb-2">Very good product</h3>
-                    <p className="text-gray-700 mb-4">
-                      Exceptional product Lorem ipsum dolor sit, amet
-                      consectetur adipisicing elit. Illo ea culpa fugiat aut non
-                      asperiores, repellat sapiente vero dicta debitis.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <button className="text-primary-500 hover:underline">
-                        Helpful
-                      </button>
-                    </div>
-                  </div>
 
-                  <div className="px-6 py-2 border-b border-gray-300 mb-6">
-                    <div className="flex items-center mb-4">
-                      {/* <img src={customerPhoto} alt={customerName} className="w-12 h-12 rounded-full mr-4" /> */}
-                      <div>
-                        <h2 className="font-semibold">Rahul Sutradhar</h2>
-                        <p className="text-sm text-gray-500">10 July, 2024</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center mb-4">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={
-                            index < rating ? "text-yellow-500" : "text-gray-300"
-                          }
-                        />
-                      ))}
-                    </div>
-                    <h3 className="font-semibold mb-2">Very good product</h3>
-                    <p className="text-gray-700 mb-4">
-                      Exceptional product Lorem ipsum dolor sit, amet
-                      consectetur adipisicing elit. Illo ea culpa fugiat aut non
-                      asperiores, repellat sapiente vero dicta debitis.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <button className="text-primary-500 hover:underline">
-                        Helpful
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="px-6 py-2 border-b border-gray-300 mb-6">
-                    <div className="flex items-center mb-4">
-                      {/* <img src={customerPhoto} alt={customerName} className="w-12 h-12 rounded-full mr-4" /> */}
-                      <div>
-                        <h2 className="font-semibold">Rahul Sutradhar</h2>
-                        <p className="text-sm text-gray-500">10 July, 2024</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center mb-4">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <FaStar
-                          key={index}
-                          className={
-                            index < rating ? "text-yellow-500" : "text-gray-300"
-                          }
-                        />
-                      ))}
-                    </div>
-                    <h3 className="font-semibold mb-2">Very good product</h3>
-                    <p className="text-gray-700 mb-4">
-                      Exceptional product Lorem ipsum dolor sit, amet
-                      consectetur adipisicing elit. Illo ea culpa fugiat aut non
-                      asperiores, repellat sapiente vero dicta debitis.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <button className="text-primary-500 hover:underline">
-                        Helpful
-                      </button>
-                    </div>
-                  </div>
+            <div className="mt-5">
+              {tab === "description" && (
+                <p className="text-sm text-neutral-55 text-justify">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+                  beatae praesentium repellendus inventore. Explicabo dolore est
+                  modi minus suscipit, tempora eligendi ipsum sunt quae quo
+                  deserunt fugiat molestiae dolorem aliquam dolorum rem, vero
+                  quaerat eaque autem dignissimos consectetur hic enim optio
+                  sit. Culpa officiis iure hic officia mollitia, exercitationem
+                  nisi.
+                </p>
+              )}
+              {tab === "reviews" && (
+                <div>
+                  {/* Reviews will go here */}
                 </div>
               )}
             </div>

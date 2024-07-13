@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1' }),
-  tagTypes : ["products"],
+  tagTypes: ["products", "cart"],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
         query: () => ({
@@ -41,7 +41,46 @@ export const baseApi = createApi({
         invalidatesTags: ["products"],
       }),
 
+
+      createCartProduct: builder.mutation({
+        query: (data) => ({
+            method : "POST",
+            url : "/cart/post-on-cart",
+            body : data,
+        }),
+        invalidatesTags : ["cart"]
+      }),
+
+
+      getAllCartProducts: builder.query({
+        query: () => ({
+            method : "GET",
+            url : "/cart",
+        }),
+        providesTags : ["cart"]
+      }),
+
+      deleteCartProduct: builder.mutation({
+        query: (id) => ({
+          method: "DELETE",
+          url: `/cart/delete-cart-product/${id}`,
+        }),
+        invalidatesTags: ["cart"],
+      }),
+
+      updateCartProduct: builder.mutation({
+        query: ({ id, quantity }) => {
+          console.log(id, quantity);
+          return {
+            method: "PUT",
+            url: `/cart/update-cart-product/${id}`,
+            body: { quantity },
+          };
+        },
+        invalidatesTags: ["cart"],
+      }),
+
   }),
 });
 
-export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } = baseApi;
+export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllCartProductsQuery, useDeleteCartProductMutation, useCreateCartProductMutation, useUpdateCartProductMutation } = baseApi;
