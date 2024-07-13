@@ -7,7 +7,7 @@ const UserProfile = () => {
     const options = ['Apple', 'Banana', 'Chips'];
 
     return (
-        <div className='relative'>
+        <div className='relative z-50'>
             <div onClick={() => setIsOpen(!isOpen)} className="flex items-center rounded-xl bg-white px-3 py-2 border cursor-pointer">
                 <h1 className="font-medium text-gray-600">{selectedValue}</h1>
                 <svg className={`${isOpen ? '-rotate-180' : 'rotate-0'} duration-300 ml-2`} width={25} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7 10L12 15L17 10" stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>{' '}</g></svg>

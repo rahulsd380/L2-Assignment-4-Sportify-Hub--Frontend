@@ -4,9 +4,12 @@ import { FeaturedProductCardProps } from "../../FeaturedProducts/FeaturedProduct
 import { BsThreeDotsVertical } from "react-icons/bs";
 import EditProductForm from "../EditProductForm";
 import { useState } from "react";
+import { useDeleteProductMutation } from "../../../redux/api/baseApi";
+import { toast } from "sonner";
 
 const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, toggleDropdown, openModal, setOpenModal, setOpenDropdownIndex }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deleteProduct, {isLoading}] = useDeleteProductMutation();
   if (!details) return null;
 
   const {
@@ -28,9 +31,17 @@ const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, tog
   };
 
 
-  const handleDelete = () => {
-    // Implement delete functionality
-    console.log("Delete clicked");
+  const handleDelete = async () => {
+    try {
+      toast.loading("Deleting..."); // Show loading toast
+      await deleteProduct(details?._id); // Call deleteProduct mutation with product ID
+      toast.success("Product deleted successfully");
+      // Optionally, refresh the product list or update UI state after deletion
+    } catch (error) {
+      toast.error(`Error deleting product: ${error.message}`);
+    } finally {
+      toast.dismiss(); // Dismiss loading toast regardless of success or error
+    }
   };
 
   return (
@@ -57,7 +68,7 @@ const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, tog
               onClick={handleDelete}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
             >
-              Delete
+             {isLoading ? "Deleting..." : "Delete"}
             </button>
           </div>
         )}
