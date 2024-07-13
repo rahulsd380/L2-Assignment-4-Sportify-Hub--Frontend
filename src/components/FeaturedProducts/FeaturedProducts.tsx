@@ -58,7 +58,7 @@ const FeaturedProducts = () => {
 }
 
   return (
-    <div className="max-width flex flex-col gap-6 mt-20">
+    <div className="max-width flex flex-col gap-6 mt-24">
       <div className="font-Roboto flex items-center justify-between">
         <h1 className="text-2xl font-bold text-neutral-60">
           <span className="text-primary-50">Featured</span> Products

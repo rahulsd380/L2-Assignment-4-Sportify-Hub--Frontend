@@ -29,6 +29,10 @@ import delivery from "./Icons/delivery.svg";
 import tickMark from "./Icons/tick-mark.svg";
 import cart2 from "./Icons/cart2.svg";
 import brand from "./Icons/brand.svg";
+import shipping from "./Icons/shipping.svg";
+import payment from "./Icons/payment.svg";
+import send from "./Icons/send.svg";
+import support from "./Icons/support.svg";
 
 // Dashboard icons
 import dashboard from "./Icons/Dashboard Icons/dashboard.svg";
@@ -83,4 +87,8 @@ export const ICONS = {
     message,
     addProduct,
     orders,
+    shipping,
+    send,
+    payment,
+    support
 }

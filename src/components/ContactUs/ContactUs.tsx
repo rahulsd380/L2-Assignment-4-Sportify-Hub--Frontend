@@ -6,7 +6,15 @@ import SocialMediaILinks from "../Footer/SocialMediaILinks";
 
 const ContactUs = () => {
   return (
-    <div className="max-w-4xl mx-auto font-Roboto flex flex-col md:flex-row gap-10 bg-white border rounded-xl p-5 md:p-10 mt-20">
+    <div className="max-width mx-auto mt-20">
+      <h1 className="text-2xl font-bold text-neutral-60 text-center">
+          <span className="text-primary-50 text-center">Contact</span> Us
+        </h1>
+        <p className="text-center text-neutral-60 mt-2">Have questions? We're here to help! Reach out via email or phone, and our support team will assist you promptly. Your satisfaction is our priority!</p>
+
+      <hr className="border border-gray-100 mt-7" />
+      <div className="max-w-4xl mx-auto font-Roboto flex flex-col md:flex-row gap-10 bg-white shadow border rounded-xl p-5 md:p-10 mt-10">
+      
       <div className="w-full flex flex-col gap-4">
 
         {/* Heading */}
@@ -61,6 +69,7 @@ const ContactUs = () => {
         </div>
 
       </div>
+    </div>
     </div>
   );
 };
