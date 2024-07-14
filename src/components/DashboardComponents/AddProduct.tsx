@@ -29,6 +29,11 @@ const AddProduct = () => {
           <Lottie animationData={addProductAnimation} loop={true} />
         </div>
 
+       <div>
+       <h1 className="text-primary-60 font-semibold text-xl">Confused about how to add product?</h1>
+       <p className="text-neutral-55 text-sm mt-2">Get support from our expert.</p>
+       </div>
+
         {/* Contact Info */}
         <div className="flex flex-col gap-3 text-base">
           <div className="flex items-center gap-2">

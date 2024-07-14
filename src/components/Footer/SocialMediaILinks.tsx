@@ -9,9 +9,9 @@ const SocialMediaILinks = () => {
                 target="blank"
                 key={index}
                 style={{ backgroundColor: icon.bgColor }}
-                className={`size-7 md:size-10 rounded-full flex justify-center items-center`}
+                className={`size-7 xl:size-10 rounded-full flex justify-center items-center`}
               >
-                <img src={icon.icon} alt="" className="size-3 md:size-6" />
+                <img src={icon.icon} alt="" className="size-3 xl:size-6" />
               </a>
             ))}
           </div>

@@ -1,14 +1,36 @@
 import { ICONS } from "../../../assets";
 import { FaStar } from "react-icons/fa";
-import { FeaturedProductCardProps } from "../../FeaturedProducts/FeaturedProductCard";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import EditProductForm from "../EditProductForm";
 import { useState } from "react";
 import { useDeleteProductMutation } from "../../../redux/api/baseApi";
 import { toast } from "sonner";
 
-const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, toggleDropdown, openModal, setOpenModal, setOpenDropdownIndex }) => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+type TProduct = {
+  _id: string;
+  img: string;
+  category: string;
+  product_name: string;
+  description: string;
+  details: string;
+  rating: number;
+  price: string;
+  brand: string;
+  stock: number;
+  delivery_type: string;
+}
+
+interface ProductsCardProps {
+  details : TProduct;
+  isOpen : boolean;
+  toggleDropdown: () => void;
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
+  setOpenDropdownIndex: (index: number | null | boolean) => void;
+}
+
+const ProductsCard: React.FC<ProductsCardProps> = ({ details, isOpen, toggleDropdown, openModal, setOpenModal, setOpenDropdownIndex }) => {
+  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
   const [deleteProduct, {isLoading}] = useDeleteProductMutation();
   if (!details) return null;
 
@@ -25,7 +47,7 @@ const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, tog
 
   
 
-  const handleEditClick = (product) => {
+  const handleEditClick = (product : TProduct) => {
     setSelectedProduct(product);
     setOpenModal(true);
   };
@@ -37,12 +59,18 @@ const ProductsCard: React.FC<FeaturedProductCardProps> = ({ details, isOpen, tog
       await deleteProduct(details?._id); // Call deleteProduct mutation with product ID
       toast.success("Product deleted successfully");
       // Optionally, refresh the product list or update UI state after deletion
-    } catch (error) {
-      toast.error(`Error deleting product: ${error.message}`);
+    } catch (error: unknown) {
+      // Type guard to check if error is an instance of Error
+      if (error instanceof Error) {
+        toast.error(`Error deleting product: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred while deleting the product");
+      }
     } finally {
       toast.dismiss(); // Dismiss loading toast regardless of success or error
     }
   };
+  
 
   return (
     <div className="relative">

@@ -47,7 +47,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   } = details;
   const [quantity, setQuantity] = useState(1);
 
-  const [createCartProduct, { isLoading }] = useCreateCartProductMutation();
+  const [createCartProduct] = useCreateCartProductMutation();
 
   const handlePostOnCart = async () => {
     const response = await createCartProduct({

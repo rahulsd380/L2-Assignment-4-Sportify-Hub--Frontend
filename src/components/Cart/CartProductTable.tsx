@@ -2,40 +2,61 @@ import { RxCross2 } from "react-icons/rx";
 import { useDeleteCartProductMutation, useUpdateCartProductMutation } from "../../redux/api/baseApi";
 import { toast } from "sonner";
 
-const CartProductTable = ({ data, onRemoveItem }) => {
-  const [deleteCartProduct, { isLoading: isDeleting }] = useDeleteCartProductMutation();
-  const [updateCartProduct, { isLoading: isUpdating }] = useUpdateCartProductMutation();
 
-  const handleDeleteCartItem = async (id) => {
+export type TCartItem = {
+  _id: string;
+  img: string;
+  productId: string;
+  quantity: number;
+  price: string;
+  product_name: string;
+};
+
+type TCartProductTableProps = {
+  data: TCartItem[];
+  onRemoveItem: (id: string) => void;
+};
+
+const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem }) => {
+  const [deleteCartProduct] = useDeleteCartProductMutation();
+  const [updateCartProduct] = useUpdateCartProductMutation();
+
+  const handleDeleteCartItem = async (id: string) => {
     try {
       toast.loading("Deleting...");
       await deleteCartProduct(id).unwrap();
       toast.success("Product deleted successfully");
       onRemoveItem(id);
-    } catch (error) {
-      toast.error(`Error deleting product: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(`Error deleting product: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred while deleting the product");
+      }
     } finally {
       toast.dismiss();
     }
   };
 
-  const handleUpdateCartProduct = async (id, quantity) => {
-    console.log("from carttable",id, quantity);
+  const handleUpdateCartProduct = async (id: string, quantity: number) => {
     try {
       toast.loading("Updating quantity...");
       const response = await updateCartProduct({ id, quantity }).unwrap();
       if (response.success) {
         toast.success(response.message);
       }
-      console.log(response);
-    } catch (error) {
-      toast.error(`Error updating product: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(`Error updating product: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred while updating the product");
+      }
     } finally {
       toast.dismiss();
     }
   };
 
-  const onUpdateQuantity = (id, quantity) => {
+  const onUpdateQuantity = (id: string, quantity: number) => {
     if (quantity < 1) return;
     handleUpdateCartProduct(id, quantity);
   };
@@ -63,7 +84,7 @@ const CartProductTable = ({ data, onRemoveItem }) => {
           </thead>
           <tbody>
             {data.map((cartItem) => (
-              <tr key={cartItem._id}>
+              <tr key={cartItem.productId}>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex items-center">
                   <img src={cartItem.img} alt={cartItem.product_name} className="w-12 h-12 object-cover mr-4" />
                   <span>{cartItem.product_name}</span>
@@ -75,7 +96,7 @@ const CartProductTable = ({ data, onRemoveItem }) => {
                   <div className="flex items-center">
                     <button
                       className="px-2 py-1 border border-gray-300 text-gray-600"
-                      onClick={() => onUpdateQuantity(cartItem._id, cartItem.quantity - 1)}
+                      onClick={() => onUpdateQuantity(cartItem.productId, cartItem.quantity - 1)}
                       disabled={cartItem.quantity <= 1}
                     >
                       -
@@ -88,7 +109,7 @@ const CartProductTable = ({ data, onRemoveItem }) => {
                     />
                     <button
                       className="px-2 py-1 border border-gray-300 text-gray-600"
-                      onClick={() => onUpdateQuantity(cartItem._id, cartItem.quantity + 1)}
+                      onClick={() => onUpdateQuantity(cartItem.productId, cartItem.quantity + 1)}
                     >
                       +
                     </button>
@@ -99,7 +120,7 @@ const CartProductTable = ({ data, onRemoveItem }) => {
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
                   <RxCross2
-                    onClick={() => handleDeleteCartItem(cartItem._id)}
+                    onClick={() => handleDeleteCartItem(cartItem.productId)}
                     className="text-red-600 hover:text-red-800 cursor-pointer"
                   />
                 </td>

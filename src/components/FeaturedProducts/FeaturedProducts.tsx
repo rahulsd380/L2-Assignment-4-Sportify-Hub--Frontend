@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import FeaturedProductCard, { FeaturedProductCardProps } from "./FeaturedProductCard";
+import FeaturedProductCard from "./FeaturedProductCard";
 import CarouselButton from "./CarouselButton";
 
 import "swiper/css/pagination";
@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { useEffect, useRef } from "react";
 import { useGetAllProductsQuery } from "../../redux/api/baseApi";
+import { TProduct } from "../AllProducts/AllProducts";
 
 const FeaturedProducts = () => {
 
@@ -119,7 +120,7 @@ const FeaturedProducts = () => {
           modules={[Pagination, Navigation]}
           className="carousel"
         >
-          {data?.data.slice(0,6).map((card : FeaturedProductCardProps, index : number) => (
+          {data?.data.slice(0,6).map((card : TProduct, index : number) => (
             <SwiperSlide key={index}>
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
@@ -134,6 +135,7 @@ const FeaturedProducts = () => {
           ))}
         </Swiper>
       </div>
+      
     </div>
   );
 };

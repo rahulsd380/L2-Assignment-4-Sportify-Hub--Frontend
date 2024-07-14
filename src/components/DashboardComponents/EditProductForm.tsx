@@ -1,9 +1,10 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useUpdateProductMutation } from "../../redux/api/baseApi";
 import { inputStyle, labelStyle, textareaStyles } from "../ContactUs/constants";
 
-type productsTypes = {
+type ProductTypes = {
+  _id : string;
   img: string;
   category: string;
   product_name: string;
@@ -16,7 +17,14 @@ type productsTypes = {
   delivery_type: string;
 };
 
-const EditProductForm = ({ openModal, setOpenModal, details, setOpenDropdownIndex }) => {
+interface EditProductFormProps {
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
+  details: ProductTypes;
+  setOpenDropdownIndex: (index: number | null | boolean) => void;
+}
+
+const EditProductForm: React.FC<EditProductFormProps> = ({ openModal, setOpenModal, details, setOpenDropdownIndex }) => {
 
   const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
@@ -26,13 +34,13 @@ const EditProductForm = ({ openModal, setOpenModal, details, setOpenDropdownInde
     formState: { errors },
   } = useForm();
 
-  const handleUpdateProduct = async (data: productsTypes) => {
+  const handleUpdateProduct: SubmitHandler<FieldValues> = async (data) => {
     try {
       const response = await updateProduct({ id: details._id, data }).unwrap();
       if (response.success) {
         toast.success(response.message);
-        setOpenModal(false)
-        setOpenDropdownIndex(false)
+        setOpenModal(false);
+        setOpenDropdownIndex(false);
       }
       console.log(response);
     } catch (error) {

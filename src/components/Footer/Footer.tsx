@@ -77,7 +77,7 @@ const Footer = () => {
             </li>
 
             {/* Subscribe input field */}  
-            <li className="bg-[#2B2B2B] px-4 py-3 rounded-[100px] max-w-[400px] border border-primary-60 transition duration-300 ease-in-out flex items-center justify-between gap-3">
+            <li className="bg-[#2B2B2B] px-4 py-3 rounded-[100px] max-w-full md:max-w-[270px] xl:max-w-[400px] border border-primary-60 transition duration-300 ease-in-out flex items-center justify-between gap-3">
             <input
                 type="text"
                 placeholder="Enter your e-mail"

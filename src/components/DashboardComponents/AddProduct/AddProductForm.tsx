@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
   inputStyle,
   labelStyle,
@@ -7,7 +7,7 @@ import {
 import { useCreateProductMutation } from "../../../redux/api/baseApi";
 import { toast } from "sonner";
 
-type productsTypes = {
+type ProductTypes = {
     img: string;
   category: string;
   product_name: string;
@@ -25,11 +25,11 @@ const AddProductForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<ProductTypes>();
 
   const [createProduct, { isLoading }] = useCreateProductMutation();
 
-  const handleAddProduct = async (data : productsTypes) => {
+  const handleAddProduct: SubmitHandler<ProductTypes> = async (data) => {
     const {
       product_name,
       img,

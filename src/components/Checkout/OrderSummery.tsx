@@ -1,6 +1,25 @@
+import React from "react";
 
 
-const OrderSummery= ({cartData, shippingCost, subtotal, vat, total}) => {
+export type TCartItem = {
+  _id: string;
+  img: string;
+  productId: string;
+  quantity: number;
+  price: string;
+  product_name: string;
+};
+
+
+type TCartProductTableProps = {
+  cartData: TCartItem[];
+  subtotal: number;
+  shippingCost: number;
+  vat: number;
+  total: number
+};
+
+const OrderSummery: React.FC<TCartProductTableProps>= ({cartData, shippingCost, subtotal, vat, total}) => {
 
     return (
         <div className="font-Roboto w-full max-w-[400px] bg-gradient-to-r from-slate-50 to-gray-100 p-6 rounded-lg">

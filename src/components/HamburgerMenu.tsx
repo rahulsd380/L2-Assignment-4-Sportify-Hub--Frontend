@@ -34,8 +34,8 @@ const HamburgerMenu = () => {
   };
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      const closestDropdown = event.target.closest(".hamburgerMenu");
+    const handleOutsideClick = (event:MouseEvent) => {
+      const closestDropdown = (event.target as HTMLElement).closest(".hamburgerMenu");
       if (isHamburgerOpen && closestDropdown === null) {
         setIsHamburgerOpen(false);
       }

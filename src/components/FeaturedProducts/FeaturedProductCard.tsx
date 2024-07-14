@@ -1,47 +1,63 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { ICONS } from "../../assets";
 import { FaStar } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa6";
+import { useCreateCartProductMutation } from "../../redux/api/baseApi";
+import { toast } from "sonner";
 
 export type FeaturedProductCardProps = {
-  details : {
-  img: string;
-  category: string;
-  product_name: string;
-  rating: number;
-  price: string;
-  brand: string;
-  stock: number;
-  delivery_type: string;
-  }
+  details: {
+    _id: string;
+    img: string;
+    category: string;
+    product_name: string;
+    rating: number;
+    price: string;
+    brand: string;
+    stock: number;
+    delivery_type: string;
+  };
 };
 
-const FeaturedProductCard: React.FC<FeaturedProductCardProps> = ({
-  details
-}) => {
+const FeaturedProductCard: React.FC<FeaturedProductCardProps> = ({ details }) => {
+  const { _id, img, category, product_name, rating, price, brand, stock, delivery_type } = details;
+  const [quantity, setQuantity] = useState(1);
+  const [createCartProduct] = useCreateCartProductMutation();
+
+  const handlePostOnCart = async () => {
+    const response = await createCartProduct({
+      img,
+      productId: _id,
+      quantity,
+      price,
+      product_name,
+    });
+    if (response?.data?.success) {
+      toast.success("Added To Cart Successfully.");
+    }
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Math.max(1, Math.min(stock, Number(e.target.value)));
+    setQuantity(value);
+  };
+
   if (!details) return null;
 
-  const {
-    img,
-    category,
-    product_name,
-    rating,
-    price,
-    brand,
-    stock,
-    delivery_type} = details
   return (
     <div>
-      <div className="bg-white border rounded-xl p-5 flex flex-col mb-9">
+      <div className="bg-white border hover:shadow-md rounded-xl p-5 flex flex-col mb-9 group">
         <div className="flex justify-center">
-          <img src={img} alt={product_name} className="max-w-[180px] h-[150px]" />
+          <img
+            src={img}
+            alt={product_name}
+            className="max-w-[180px] h-[150px] transition-transform duration-300 transform group-hover:scale-125"
+          />
         </div>
         <p className="text-[11px] font-semibold text-neutral-60 mt-2">{category}</p>
-        <h1 className="font-Roboto font-medium text-lg text-neutral-55">
-          {product_name}
-        </h1>
+        <h1 className="font-Roboto font-medium text-lg text-neutral-55">{product_name}</h1>
 
-        {/* ratings */}
+        {/* Ratings */}
         <div className="flex items-center gap-2 mt-2">
           {Array.from({ length: 5 }, (_, index) => (
             <FaStar key={index} className={index < rating ? "text-yellow-500" : "text-gray-300"} />
@@ -71,13 +87,23 @@ const FeaturedProductCard: React.FC<FeaturedProductCardProps> = ({
             {delivery_type} Delivery
           </div>
 
-          {/* View details button */}
-          <Link
-            to={"/"}
-            className="bg-primary-10 size-12 rounded-full border border-neutral-40 hover:border-primary-60 transition duration-300 flex justify-center items-center"
-          >
-            <img src={ICONS.cart} alt="Cart" className="size-7" />
-          </Link>
+          {/* Action buttons */}
+          <div className="flex items-center gap-4">
+            <input
+              type="number"
+              value={quantity}
+              onChange={handleQuantityChange}
+              min="1"
+              max={stock}
+              className="border rounded w-16 text-center hidden"
+            />
+            <button
+              onClick={handlePostOnCart}
+              className="rounded text-primary-60 hover:text-white px-3 py-3 border border-primary-60 hover:bg-primary-70 transition duration-300 flex justify-center items-center group"
+            >
+              <FaCartPlus />
+            </button>
+          </div>
         </div>
       </div>
     </div>

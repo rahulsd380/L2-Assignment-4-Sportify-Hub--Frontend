@@ -14,7 +14,7 @@ const CartTotal: React.FC<{ data: { price: number; quantity: number }[] }> = ({ 
   const total = subtotal + shippingCost + vat;
 
   return (
-    <div className="border border-blue-300 p-6 rounded-md font-roboto max-w-xs">
+    <div className="border border-blue-300 p-6 rounded-md font-roboto w-full md:max-w-xs">
       <h2 className="text-lg font-semibold mb-4">CART TOTALS</h2>
       <div>
         <div className="flex justify-between mb-3">

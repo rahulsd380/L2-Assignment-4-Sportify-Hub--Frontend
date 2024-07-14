@@ -6,19 +6,36 @@ import { useEffect, useState } from "react";
 import { useCreateOrderMutation, useGetAllCartProductsQuery } from "../redux/api/baseApi";
 import { toast } from "sonner";
 
+export type TCartItem = {
+  _id: string;
+  img: string;
+  productId: string;
+  quantity: number;
+  price: string;
+  product_name: string;
+};
+
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  shipping_address: string;
+  delivery: string;
+};
+
 const Checkout = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
   const navigate = useNavigate();
 
-  const { data, isLoading : isCartLoading } = useGetAllCartProductsQuery({});
-  const [ createOrder, {isLoading: isOrderPlacing} ] = useCreateOrderMutation({});
+  const { data } = useGetAllCartProductsQuery({});
+  const [ createOrder ] = useCreateOrderMutation({});
   const [cartData, setCartData] = useState(data?.data || []);
-  const [shippingCost, setShippingCost] = useState(5.00);
+  const shippingCost = 5.00;
 
 
   useEffect(() => {
@@ -28,7 +45,9 @@ const Checkout = () => {
   }, [data]);
 
   // Subtotal price
-  const subtotal = cartData.reduce((acc, item) => acc + Number(item.price) * item.quantity, 0);
+  const subtotal = cartData.reduce((acc: number, item: TCartItem) => acc + parseFloat(item.price) * item.quantity, 0);
+
+
   
   // VAT
   const vat = subtotal * 0.15;
@@ -37,7 +56,7 @@ const Checkout = () => {
   const total = subtotal + shippingCost + vat;
 
 
-  const handlePlaceOrder = async (formData) => {
+  const handlePlaceOrder = async (formData: FormData) => {
     const orderData = {
       customer_name: formData.name,
       email: formData.email,
@@ -47,27 +66,28 @@ const Checkout = () => {
       sub_total: subtotal,
       total: total,
       vat: vat,
-      products: cartData.map(item => ({
+      products: cartData.map((item: TCartItem) => ({
         product_name: item.product_name,
-        price: item.price
-      }))
+        price: item.price,
+      })),
     };
-    if(cartData.length > 0) {
+  
+    if (cartData.length > 0) {
       try {
         toast.loading("Placing your order...");
         await createOrder(orderData).unwrap();
         toast.success("Order placed successfully!");
         toast.dismiss();
-        navigate('/order-success')
+        navigate("/order-success");
       } catch (error) {
         toast.error("Failed to place the order. Please try again.");
       }
-    }else{
-     return toast.error("Your cart is empty. Please add some products to proceed.");
+    } else {
+      return toast.error("Your cart is empty. Please add some products to proceed.");
     }
-
-    
   };
+  
+  
 
   return (
     <div className="mt-16">
