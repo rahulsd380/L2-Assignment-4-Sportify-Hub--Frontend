@@ -70,6 +70,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     });
   };
 
+
+
+  
+
   const [tab, setTab] = useState<"description" | "reviews">("description");
 
   const socialMediaIcon = [

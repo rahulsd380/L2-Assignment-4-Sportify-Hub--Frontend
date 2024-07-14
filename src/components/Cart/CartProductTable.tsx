@@ -1,6 +1,6 @@
 import { RxCross2 } from "react-icons/rx";
-import { useDeleteCartProductMutation, useUpdateCartProductMutation } from "../../redux/api/baseApi";
 import { toast } from "sonner";
+import { useDeleteCartProductMutation, useUpdateCartProductMutation } from "../../redux/api/baseApi";
 
 
 export type TCartItem = {
@@ -14,38 +14,35 @@ export type TCartItem = {
 
 type TCartProductTableProps = {
   data: TCartItem[];
-  onRemoveItem: (id: string) => void;
 };
 
-const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem }) => {
+const CartProductTable: React.FC<TCartProductTableProps> = ({ data }) => {
+
   const [deleteCartProduct] = useDeleteCartProductMutation();
   const [updateCartProduct] = useUpdateCartProductMutation();
 
   const handleDeleteCartItem = async (id: string) => {
     try {
       toast.loading("Deleting...");
-      await deleteCartProduct(id).unwrap();
+      await deleteCartProduct(id);
       toast.success("Product deleted successfully");
-      onRemoveItem(id);
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(`Error deleting product: ${error.message}`);
       } else {
         toast.error("An unknown error occurred while deleting the product");
       }
-    } finally {
-      toast.dismiss();
-    }
+    } 
   };
 
   const handleUpdateCartProduct = async (id: string, quantity: number) => {
     try {
       toast.loading("Updating quantity...");
-      const response = await updateCartProduct({ id, quantity }).unwrap();
+      const response = await updateCartProduct({ id, quantity }).unwrap(); // Correct format
       if (response.success) {
         toast.success(response.message);
       }
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error updating product: ${error.message}`);
       } else {
@@ -55,7 +52,7 @@ const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem
       toast.dismiss();
     }
   };
-
+  
   const onUpdateQuantity = (id: string, quantity: number) => {
     if (quantity < 1) return;
     handleUpdateCartProduct(id, quantity);
@@ -96,7 +93,10 @@ const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem
                   <div className="flex items-center">
                     <button
                       className="px-2 py-1 border border-gray-300 text-gray-600"
-                      onClick={() => onUpdateQuantity(cartItem.productId, cartItem.quantity - 1)}
+                      onClick={() => {
+                        console.log(cartItem);
+                        onUpdateQuantity(cartItem._id, cartItem.quantity - 1)
+                      }}
                       disabled={cartItem.quantity <= 1}
                     >
                       -
@@ -109,7 +109,7 @@ const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem
                     />
                     <button
                       className="px-2 py-1 border border-gray-300 text-gray-600"
-                      onClick={() => onUpdateQuantity(cartItem.productId, cartItem.quantity + 1)}
+                      onClick={() => onUpdateQuantity(cartItem._id, cartItem.quantity + 1)}
                     >
                       +
                     </button>
@@ -120,7 +120,7 @@ const CartProductTable: React.FC<TCartProductTableProps> = ({ data, onRemoveItem
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
                   <RxCross2
-                    onClick={() => handleDeleteCartItem(cartItem.productId)}
+                    onClick={() => handleDeleteCartItem(cartItem?._id)}
                     className="text-red-600 hover:text-red-800 cursor-pointer"
                   />
                 </td>

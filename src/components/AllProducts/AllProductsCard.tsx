@@ -90,6 +90,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({ details }) => {
 
           <div className="flex items-center justify-between mt-3">
             <div className="flex items-center gap-4">
+              <div className="hidden">
               <button onClick={decreaseQuantity} className="px-2 py-1 border border-gray-300">
                 -
               </button>
@@ -97,6 +98,7 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({ details }) => {
               <button onClick={increaseQuantity} className="px-2 py-1 border border-gray-300">
                 +
               </button>
+              </div>
 
               <button
                 onClick={() => setOpenModal(!openModal)}

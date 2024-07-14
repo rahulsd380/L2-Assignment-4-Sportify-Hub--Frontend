@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import CartTotal from "../components/Cart/CartTotal";
 import { useGetAllCartProductsQuery } from "../redux/api/baseApi";
 import { useEffect, useState } from "react";
-import CartProductTable, { TCartItem } from './../components/Cart/CartProductTable';
+import CartProductTable from './../components/Cart/CartProductTable';
 
 const Cart = () => {
     const { data, isLoading } = useGetAllCartProductsQuery({});
     const [cartData, setCartData] = useState(data?.data || []);
+
 
 
     useEffect(() => {
@@ -28,9 +29,9 @@ const Cart = () => {
     //     );
     // };
 
-    const handleRemoveItem = (id : string) => {
-        setCartData((prevData : TCartItem[]) => prevData.filter(item => item._id !== id));
-    };
+    // const handleRemoveItem = (id : string) => {
+    //     setCartData((prevData : TCartItem[]) => prevData.filter(item => item._id !== id));
+    // };
 
     return (
         <div className="max-width mx-auto mt-16 px-5 xl:px-0">
@@ -41,7 +42,6 @@ const Cart = () => {
                 <CartProductTable 
                     data={cartData} 
                     // onUpdateQuantity={handleUpdateQuantity} 
-                    onRemoveItem={handleRemoveItem} 
                 />
                 <CartTotal data={cartData} />
             </div>
