@@ -199,7 +199,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
               <div className="flex items-center justify-between mt-3">
                 <div className="flex items-center gap-4 w-full">
                   {/* Quantity */}
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 hidden">
                     <p className="text-xs">QTY : </p>
                     <div className="rounded flex justify-between items-center gap-8 border max-w-[150px] pl-2 ">
                       <p>{quantity}</p>

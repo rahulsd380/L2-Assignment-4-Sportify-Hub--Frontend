@@ -27,9 +27,9 @@ const Products = () => {
 
   const toggleDropdown = (index: number) => {
     if (openDropdownIndex === index) {
-      setOpenDropdownIndex(null); // Close dropdown if clicking on the same one
+      setOpenDropdownIndex(null);
     } else {
-      setOpenDropdownIndex(index); // Open dropdown for the clicked index
+      setOpenDropdownIndex(index);
     }
   };
 

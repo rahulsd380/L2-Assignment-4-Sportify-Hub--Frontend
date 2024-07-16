@@ -32,7 +32,9 @@ const CartProductTable: React.FC<TCartProductTableProps> = ({ data }) => {
       } else {
         toast.error("An unknown error occurred while deleting the product");
       }
-    } 
+    } finally{
+      toast.dismiss();
+    }
   };
 
   const handleUpdateCartProduct = async (id: string, quantity: number) => {

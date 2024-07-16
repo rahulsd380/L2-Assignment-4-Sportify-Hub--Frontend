@@ -42,11 +42,11 @@ const AllProductsCard: React.FC<AllProductCardProps> = ({ details }) => {
   };
 
   const increaseQuantity = () => {
-    if (quantity < stock) setQuantity(quantity + 1); // Increase quantity if stock allows
+    if (quantity < stock) setQuantity(quantity + 1);
   };
 
   const decreaseQuantity = () => {
-    if (quantity > 1) setQuantity(quantity - 1); // Decrease quantity but not below 1
+    if (quantity > 1) setQuantity(quantity - 1);
   };
 
   return (

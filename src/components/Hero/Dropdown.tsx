@@ -19,7 +19,7 @@ import {
     const [open, setOpen] = useState(true);
   
     return (
-      <div className="z-50 bg-white">
+      <div className="z-40 bg-white">
         <motion.div animate={open ? "open" : "closed"} className="relative">
           <button
             onClick={() => setOpen((pv) => !pv)}

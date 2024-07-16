@@ -172,10 +172,10 @@ const FilterForm: React.FC<TFilterFormProps> = ({
           <ul className="flex flex-col gap-2 mt-3">
             {ratings.map((rating, index) => (
               <li
-                onClick={() => {
-                  handleRatingFilter(rating);
-                  console.log(rating);
-                }}
+                // onClick={() => {
+                //   handleRatingFilter(rating);
+                //   console.log(rating);
+                // }}
                 key={index}
                 className="text-sm"
               >
@@ -191,6 +191,10 @@ const FilterForm: React.FC<TFilterFormProps> = ({
                   <div className="flex items-center">
                     {[...Array(5)].map((_, starIndex) => (
                       <FaStar
+                      onClick={() => {
+                        handleRatingFilter(rating);
+                        console.log(rating);
+                      }}
                         key={starIndex}
                         className={
                           starIndex < rating

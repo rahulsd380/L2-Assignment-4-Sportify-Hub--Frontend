@@ -18,7 +18,7 @@ export type TProduct = {
 
 type TAllProductsProps = {
     products?: TProduct[];
-    handleSearch: (searchTerm: string) => void; // Define the type for handleSearch
+    handleSearch: (searchTerm: string) => void;
 }
 
 const AllProducts: React.FC<TAllProductsProps> = ({ products = [], handleSearch }) => {
@@ -27,7 +27,7 @@ const AllProducts: React.FC<TAllProductsProps> = ({ products = [], handleSearch 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const term = e.target.value;
         setSearchTerm(term);
-        handleSearch(term); // Call the search handler passed from Products
+        handleSearch(term);
     };
 
     return (

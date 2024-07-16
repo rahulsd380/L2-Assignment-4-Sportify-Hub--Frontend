@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import AllProducts from "../components/AllProducts/AllProducts";
 import FilterForm from "../components/FilterForm";
@@ -32,7 +31,7 @@ const Products = () => {
     }, [data]);
 
     const categoryItems: string[] = [...new Set(allProducts.map(item => item.category))];
-    const brandItems: string[] = [...new Set(allProducts.map(item => item.brand))]; // Get unique brands
+    const brandItems: string[] = [...new Set(allProducts.map(item => item.brand))];
 
     const categoryFilter = (category: string) => {
         const newItems = allProducts.filter(item => item.category === category);
@@ -81,16 +80,15 @@ const Products = () => {
     };
 
     return (
-        <div className="max-width mt-10 flex flex-col md:flex-row justify-between gap-10">
+        <div className="max-width mt-10 flex flex-col md:flex-row justify-between gap-10 px-5 md:px-0">
             <FilterForm 
                 categoryItems={categoryItems} 
-                brandItems={brandItems} // Pass unique brands to the filter form
+                brandItems={brandItems}
                 categoryFilter={categoryFilter} 
-                brandFilter={brandFilter} // Add brand filter function
+                brandFilter={brandFilter}
                 handleRatingFilter={handleRatingFilter} 
                 handleSortChange={handleSortChange}
-                handleClearForm={handleClearForm} 
-                // handleSearch={handleSearch}
+                handleClearForm={handleClearForm}
             />
             <AllProducts products={filteredProducts} handleSearch={handleSearch} />
         </div>

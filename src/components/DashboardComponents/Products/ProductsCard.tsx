@@ -55,26 +55,24 @@ const ProductsCard: React.FC<ProductsCardProps> = ({ details, isOpen, toggleDrop
 
   const handleDelete = async () => {
     try {
-      toast.loading("Deleting..."); // Show loading toast
-      await deleteProduct(details?._id); // Call deleteProduct mutation with product ID
+      toast.loading("Deleting...");
+      await deleteProduct(details?._id);
       toast.success("Product deleted successfully");
-      // Optionally, refresh the product list or update UI state after deletion
     } catch (error: unknown) {
-      // Type guard to check if error is an instance of Error
       if (error instanceof Error) {
         toast.error(`Error deleting product: ${error.message}`);
       } else {
         toast.error("An unknown error occurred while deleting the product");
       }
     } finally {
-      toast.dismiss(); // Dismiss loading toast regardless of success or error
+      toast.dismiss();
     }
   };
   
 
   return (
     <div className="relative">
-      {/* Dropdown Trigger */}
+      {/* Dropdown btn */}
       <div className="absolute top-0 right-0 mt-2 mr-2">
         <button
            onClick={toggleDropdown}
@@ -83,7 +81,7 @@ const ProductsCard: React.FC<ProductsCardProps> = ({ details, isOpen, toggleDrop
           <BsThreeDotsVertical />
         </button>
 
-        {/* Dropdown Content */}
+        {/* Dropdown items */}
         {isOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 divide-y divide-gray-100">
             <button

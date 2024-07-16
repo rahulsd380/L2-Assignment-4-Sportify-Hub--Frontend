@@ -6,26 +6,26 @@ const HamburgerMenu = () => {
 
   const navlinks = [
     {
-      label: "Home",
-      path: "",
+        label : "Home",
+        path : ""
     },
     {
-      label: "About Me",
-      path: "about-me",
+        label : "All Products",
+        path : "all-products"
     },
     {
-      label: "Services",
-      path: "services",
+        label : "Cart",
+        path : "cart"
     },
     {
-      label: "Projects",
-      path: "projects",
+        label : "About Us",
+        path : "about-us"
     },
     {
-      label: "Contact us",
-      path: "contact-us",
-    },
-  ];
+        label : "Manage Products",
+        path : "dashboard"
+    }
+]
 
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
@@ -48,7 +48,7 @@ const HamburgerMenu = () => {
     };
   }, [isHamburgerOpen]);
   return (
-    <div className="relative hamburgerMenu">
+    <div className="relative hamburgerMenu z-50">
         <FaAlignRight onClick={toggleHamburgerMenu}
         className="w-10 cursor-pointer"
         />
@@ -64,7 +64,7 @@ const HamburgerMenu = () => {
             <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center bg-[#0E1330] border-b border-[#282D45] p-4">
               <h1 className="text-white font-Montserrat text-xl font-bold bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
-                Rahul Sutradhar
+                Sportify Hub
               </h1>
               <FaChevronLeft onClick={() => setIsHamburgerOpen(!isHamburgerOpen)} className="w-6 cursor-pointer"/>
             </div>
